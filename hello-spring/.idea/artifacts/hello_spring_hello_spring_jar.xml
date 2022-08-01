@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hello-spring.hello-spring:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/hello_spring_hello_spring_jar</output-path>
+    <root id="archive" name="hello-spring.hello-spring.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
