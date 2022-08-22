@@ -1,13 +1,11 @@
 package hello.hellospring.service;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
-import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
@@ -16,14 +14,23 @@ import javax.xml.crypto.Data;
 @Configuration
 public class SpringConfig {
 
+//    JDBC 사용을 위해 DataSource을 주입 받는다.
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public SpringConfig(DataSource dataSource){
+//        this.dataSource = dataSource;
+//    }
 
-    private DataSource dataSource;
+//  JPA사용을 위해 EntityManager을 주입 받는다.
+    private EntityManager em;
 
     @Autowired
-    public SpringConfig(DataSource dataSource){
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
-//  스프링 빈 등록
+
+    //  스프링 빈 등록
     @Bean
     public MemberService memberService() {
         // @Autowired와 같이 동작
@@ -37,6 +44,7 @@ public class SpringConfig {
 //      JDBC 연결로 변경경
 //       return new JdbcMemberRepository(dataSource);
 //      JDBCTemplate 연결로 변경
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 }
