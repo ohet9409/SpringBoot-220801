@@ -4,6 +4,7 @@ import hello.hellospring.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.Commit;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class MemoryMemberRepositoryTest {
 
-    MemberRepository repository = new MemoryMemberRepository();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
 
     // 항상 모든 테스트 코드가 끝나고 아래 기능이 동작하도록 어노테이션 설정 = 콜백 메서드
     @AfterEach
@@ -22,6 +23,7 @@ public class MemoryMemberRepositoryTest {
     }
     
     @Test
+    @Commit
     public void save(){
         Member member = new Member();
         member.setName("spring");
