@@ -22,17 +22,29 @@ public class MemberService {
 //    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+
     }
 
     /*
     * 회원 가입
     * */
     public Long join(Member member) {
-        // 중복회원 검증
-        validateDuplicateMember(member);
+//      메소드 수행시간을 구한다는 과정에서의 코드
+        long start = System.currentTimeMillis();
 
-        memberRepository.save(member);
-        return member.getId();
+        try {
+            // 중복회원 검증
+            validateDuplicateMember(member);
+
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long times = finish - start;
+
+            System.out.println("join = " + times + "ms");
+        }
+
     }
 
     private void validateDuplicateMember(Member member) {

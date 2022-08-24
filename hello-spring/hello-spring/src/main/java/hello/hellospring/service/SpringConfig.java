@@ -1,5 +1,6 @@
 package hello.hellospring.service;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,6 +49,12 @@ public class SpringConfig {
         return new MemberService(memberRepository);
     }
 
+    //  AOP 빈 등록
+//  아래 TimeTraceAop을 생성하는 코드도 AOP의 대상으로 지정되기 때문에 @Around어노테이션에서 SpringConfig클래스를 범위에서 제외 시켜줘야 한다.
+    @Bean
+    public TimeTraceAop timeTraceAop() {
+        return new TimeTraceAop();
+    }
 
 //    @Bean
 //    public MemberRepository memberRepository() {
@@ -60,4 +67,6 @@ public class SpringConfig {
 ////        JPA 사용
 ////        return new JpaMemberRepository(em);
 //    }
+    
+
 }

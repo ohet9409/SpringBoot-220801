@@ -26,6 +26,9 @@ public class MemberController {
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+//      AOP 프록시 클래스 생성 확인
+//      memberService: class hello.hellospring.service.MemberService$$EnhancerBySpringCGLIB$$c70ac3a1
+        System.out.println("memberService: " + memberService.getClass());
     }
 
     //  DI의 setter 주입방법: Controller에 setter가 퍼블릭으로 공객되고 만약 잘못 수정된다면 문제가 발생될 수 있다.
